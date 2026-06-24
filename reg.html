@@ -1,0 +1,59 @@
+<html>
+<head> 
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Event Registration</title> 
+<script src="https://cdn.tailwindcss.com"></script> 
+<script> 
+tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }; 
+</script> 
+</head> 
+<body class="flex items-center justify-center min-h-screen p-4 bg-gray-50 font-sans"> 
+<div class="w-full max-w-xs bg-white p-6 rounded-xl shadow-xl"> 
+<h1 class="text-2xl font-semibold mb-6 text-center text-indigo-600">Event Sign-up</h1> 
+<div id="error-message" class="hidden mb-4 p-2 text-sm bg-red-100 border border-red-400 text-red-700 
+rounded-md"> 
+Fill all fields. 
+</div> 
+<form id="registration-form" class="space-y-4"> 
+<label class="block text-sm font-medium text-gray-700">Name</label> 
+<input type="text" id="fullName" required placeholder="Full Name" class="w-full p-2 border rounded- 
+md focus:ring-indigo-500 focus:border-indigo-500"> 
+<label class="block text-sm font-medium text-gray-700">Email</label> 
+<input type="email" id="email" required placeholder="Email Address" class="w-full p-2 border rounded- 
+md focus:ring-indigo-500 focus:border-indigo-500"> 
+<label class="block text-sm font-medium text-gray-700">Event</label>
+<select id="eventChoice" required class="w-full p-2 border rounded-md bg-white focus:ring-indigo-500 
+focus:border-indigo-500"> 
+<option value="">-- Select Event --</option> 
+<option value="a">Day 1 Keynote</option> 
+<option value="b">Workshop</option> 
+</select> 
+<button type="submit" class="w-full py-2 mt-4 bg-indigo-600 text-white font-medium rounded-md hover: 
+bg-indigo-700">Submit</button> 
+</form> 
+<div id="success-message" class="hidden mt-6 p-4 bg-green-100 border-l-4 border-green-500 text-green- 
+700 rounded-lg"> 
+<p class="font-bold">Registered!</p><p id="confirmation-details" class="text-sm"></p> 
+<button onclick="resetF()" class="mt-2 px-3 py-1 bg-green-600 text-white text-xs font-medium rounded 
+hover:bg-green-700">New</button> 
+</div> 
+</div> 
+<script> 
+const form = document.getElementById('registration-form'), msgBox = document.getElementById 
+('success-message'); 
+const detailsEl = document.getElementById('confirmation-details'), errorEl = document.getElementById 
+('error-message'); 
+const resetF = () => { form.reset(); msgBox.classList.add('hidden'); form.classList.remove('hidden'); 
+errorEl.classList.add('hidden'); }; 
+form.addEventListener('submit', function(e) { 
+e.preventDefault(); errorEl.classList.add('hidden'); 
+const n = document.getElementById('fullName').value.trim(), em = 
+document.getElementById('email').value.trim(); 
+const el = document.getElementById('eventChoice'); const et = el.options[el.selectedIndex].text; 
+if (!n || !em || !el.value) { errorEl.classList.remove('hidden'); return; } 
+detailsEl.innerHTML = `Registered for: ${et}. Confirmed via ${em}.`; 
+form.classList.add('hidden'); msgBox.classList.remove('hidden'); 
+}); 
+</script> 
+</body> 
+</html>
