@@ -1,4 +1,4 @@
-class Geeks
+class Prime1
 {
     static boolean isPrime(int n)
     {
